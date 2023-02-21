@@ -20,20 +20,49 @@ let winningPattern = [
 let xTurn = true;
 let count = 0;
 
+//disable all buttons
+
+const disableButtons = () => {
+    btnRef.forEach((element)=>( element.disabled = true));
+    //enable popup
+
+    popupRef.classList.remove("hide");
+
+};
+
+//enable all buttons (for new game and restart)
+
+const enableButtons = () => {
+    btnRef.forEach((element)=> {
+         element.innerText ="";
+         element.innerText = "false";
+    });
+    //disable popup
+   
+
+    popupRef.classList.add("hide");
+};
+//this function is executed when a player wins
+const winFunction = (letter) => {
+    disableButtons();
+};
+
 // win logic //
 const winChecker = () => {
+    // loop through all win patterns
     for (let i of winningPattern) {
         let [element1, element2, element3] = [
      btnRef[i[0]].innerText,
      btnRef[i[1]].innerText,
-     btnRef[i[2]].innerText
+     btnRef[i[2]].innerText,
     ];
     // check if elements are filled 
     // if 3 empty elements are same and would give win
 
-    if (element1 != ""&& element2 !="" & element3 !=""){
-        if(element1==element2==element3) {
-            // if all buttons have same value then pas the value to win //
+    if (element1 != ""&& (element2 !="") & (element3 !="")){
+        if(element1==element2 && element2 == element3) {
+            // if all buttons have t6he same value then pass the value to winfunction //
+            winFunction(element1);
         }
     }
     }
