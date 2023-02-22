@@ -35,17 +35,44 @@ const disableButtons = () => {
 const enableButtons = () => {
     btnRef.forEach((element)=> {
          element.innerText ="";
-         element.innerText = "false";
+         element.disabled = "false";
     });
     //disable popup
    
 
     popupRef.classList.add("hide");
 };
-//this function is executed when a player wins
-const winFunction = (letter) => {
+
+// this function is executed when a player wins
+const winfunction = (letter) => {
     disableButtons();
+    if (letter == "x") {
+        msgRef.innerText = "&#x1F389;  <br> 'x' wins";
+    }
+    else {
+        msgRef.innerText = "&#x1F389;  <br> 'o' wins";
+    }
 };
+
+//function for draw 
+const drawfunction = () => {
+    disableButtons();
+    msgRef.innerText = "&#x1F60E;  <br> it's a Draw";
+};
+
+//function for 
+//new game
+newgameBtn.addEventListener("click",() => {
+    count = 0;
+    enableButtons();
+});
+
+restartBtn.addEventListener("click",() => {
+    count = 0;
+    enableButtons();
+});
+
+
 
 // win logic //
 const winChecker = () => {
@@ -88,15 +115,15 @@ btnRef.forEach((element)=>{
     }
     // increament count on each click //
     count += 1;
-    if(count === 0){
-        // it's a draw since we have 9 box //
-
-       
-    }
+    if(count == 9){
+        drawfunction();
+        
+}
 
     // check for win on every click //
     winChecker();
 });
 
 });
-
+// enable buttons and disable popup buttons //
+window.onload = enableButtons;
